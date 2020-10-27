@@ -1,28 +1,66 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div
+        id="app"
+    >
+        <HeaderLayout/>
+        <div
+            class="content"
+        >
+
+        </div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HeaderLayout from '@/layouts/HeaderLayout';
+import FooterLayout from '@/layouts/FooterLayout';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name: 'App',
+    components: {
+        HeaderLayout,
+        FooterLayout
+    }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@font-face {
+    font-family: "Google Sans";
+    src: local('GoogleSans'), url("./assets/fonts/GoogleSans/ProductSans-Regular.woff") format("woff");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: local('GoogleSans'), url("./assets/fonts/GoogleSans/ProductSans-Medium.woff") format("woff");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Lobster";
+    src: local('Lobster'), url("./assets/fonts/Lobster/Lobster-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: 'Google Sans';
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, .01);
+}
+
+a {
+    text-decoration: none;
+    color: #0558ff;
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
+    }
 }
 </style>
