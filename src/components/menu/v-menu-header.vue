@@ -27,7 +27,6 @@
 <script>
 import VModalAuthorization from '@/components/modal/v-modal-authorization';
 import VModalRegistration from '@/components/modal/v-modal-registration';
-
 import VSpacerHorizontal from '@/components/spacers/v-spacer-horizontal';
 
 export default {

@@ -11,7 +11,7 @@ import VLayoutHeader from '@/layouts/v-header-layout';
 
 export default {
   name: 'App',
-    components: {
+  components: {
     VLayoutHeader,
   }
 }

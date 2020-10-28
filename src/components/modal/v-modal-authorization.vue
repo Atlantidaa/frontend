@@ -11,20 +11,20 @@
               :type="settings.form.login.type"
               :placeholder="settings.form.login.placeholder"
               :name="settings.form.login.name"
-              :value="settings.form.login.value"
+              :value="values.login"
               :prepend-icon="settings.form.login.prependIcon"
-              @update:value="settings.form.login.value = $event"
+              @update:value="values.login = $event"
           />
           <v-spacer-vertical :size="settings.template.spacers.body.size" />
           <v-form-input-base
               :type="settings.form.password.type"
               :placeholder="settings.form.password.placeholder"
               :name="settings.form.password.name"
-              :value="settings.form.password.value"
+              :value="values.password"
               :prepend-icon="settings.form.password.prependIcon"
               :append-icon="settings.form.password.appendIcon"
               @click:append-icon="changePasswordFieldType"
-              @update:value="settings.form.password.value = $event"
+              @update:value="values.password = $event"
           />
           <v-spacer-vertical :size="settings.template.spacers.body.size" />
           <v-form-submit-base
@@ -46,8 +46,11 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
+
 import IconsConfig from '@/config/icons';
 import FieldsConfig from '@/config/fields';
+import User from '@/config/user';
 
 import VModalBase from '@/components/modal/v-modal-base';
 import VFormInputBase from '@/components/forms/v-form-input-base';
@@ -70,6 +73,10 @@ export default {
   },
   data() {
     return {
+      values: {
+        login: '',
+        password: ''
+      },
       settings: {
         form: {
           login: {
@@ -104,9 +111,23 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapGetters([
+      'AUTHORIZED_STATE',
+    ])
+  },
   methods: {
-    authorize() {
-      //
+    ...mapActions([
+      'TOGGLE_AUTHORIZED',
+    ]),
+    async authorize() {
+      let status = await User.authorize(this.values.login, this.values.password);
+
+      if (status) {
+        this.TOGGLE_AUTHORIZED();
+      } else {
+
+      }
     },
     changePasswordFieldType() {
       if (this.settings.form.password.type === FieldsConfig.types.password) {
