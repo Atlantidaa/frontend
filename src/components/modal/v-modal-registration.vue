@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import VModalBase from '@/components/blocks/modals/VModalBase'
+import VModalBase from '@/components/modal/v-modal-base'
 
 export default {
-  name: 'VModalRegistration',
+  name: 'v-modal-registration',
   components: {
     VModalBase
   },

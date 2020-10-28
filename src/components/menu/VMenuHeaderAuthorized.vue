@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import VSpacerHorizontal from '@/components/blocks/spacers/VSpacerHorizontal';
-import Icon from '@/components/icons/Icon';
+import VSpacerHorizontal from '@/components/spacers/v-spacer-horizontal';
+import Icon from '@/components/icons/v-icon-base';
 import IconsConfig from '@/config/icons';
 
 export default {

@@ -11,7 +11,7 @@
 import StyleBuilder from '@/mixins/StyleBuilder';
 
 export default {
-    name: 'VFormSubmitBase',
+    name: 'v-form-submit-base',
     props: {
         value: {
             type: String,
