@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import StyleBuilder from '@/mixins/StyleBuilder';
-
 export default {
     name: 'v-form-submit-base',
     props: {
