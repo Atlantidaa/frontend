@@ -1,4 +1,15 @@
-<template>
+<template v-if="!AUTHORIZED_STATE">
+  <div class="menu">
+    <div class="menu-item">
+      {{USER_DATA_STATE.name}}
+    </div>
+    <v-spacer-horizontal :size="15" />
+    <div class="menu-item" @click="logout">
+      Выйти
+    </div>
+  </div>
+</template>
+<template v-else>
   <div class="menu">
     <div
         class="menu-item menu-item-primary"
@@ -25,6 +36,10 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
+
+import User from '@/config/user';
+
 import VModalAuthorization from '@/components/modal/v-modal-authorization';
 import VModalRegistration from '@/components/modal/v-modal-registration';
 import VSpacerHorizontal from '@/components/spacers/v-spacer-horizontal';
@@ -43,6 +58,22 @@ export default {
     VModalAuthorization,
     VModalRegistration,
     VSpacerHorizontal,
+  },
+  computed: {
+    ...mapGetters([
+        'AUTHORIZED_STATE',
+        'USER_DATA_STATE'
+    ])
+  },
+  methods: {
+    ...mapActions([
+        'TOGGLE_AUTHORIZED'
+    ]),
+    logout() {
+      console.log(this.AUTHORIZED_STATE);
+      User.logout();
+      this.TOGGLE_AUTHORIZED();
+    }
   }
 }
 </script>

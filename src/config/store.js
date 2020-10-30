@@ -10,7 +10,7 @@ export default new Vuex.Store({
     state: {
         user: {
             authorized: User.isAuthorized(),
-            data: User.getUserData(),
+            data: User.getData(),
         }
     },
     mutations: {
@@ -26,6 +26,9 @@ export default new Vuex.Store({
     getters: {
         AUTHORIZED_STATE(state) {
             return state.user.authorized;
+        },
+        USER_DATA_STATE(state) {
+            return state.user.data;
         }
     }
 });

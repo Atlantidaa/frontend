@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import {mapActions} from 'vuex';
 
 import IconsConfig from '@/config/icons';
 import FieldsConfig from '@/config/fields';
@@ -111,11 +111,6 @@ export default {
       },
     }
   },
-  computed: {
-    ...mapGetters([
-      'AUTHORIZED_STATE',
-    ])
-  },
   methods: {
     ...mapActions([
       'TOGGLE_AUTHORIZED',
@@ -125,6 +120,7 @@ export default {
 
       if (status) {
         this.TOGGLE_AUTHORIZED();
+        this.close();
       } else {
 
       }
@@ -137,6 +133,9 @@ export default {
         this.settings.form.password.type = FieldsConfig.types.password;
         this.settings.form.password.appendIcon = IconsConfig.visible.hide;
       }
+    },
+    close() {
+      this.$emit('close');
     }
   }
 }

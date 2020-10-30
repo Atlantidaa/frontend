@@ -7,23 +7,28 @@ const USER_DATA_KEY = 'user_data';
 
 export default  {
     init() {
-        if (!this.getUserData().length) {
+        if (!Object.keys(this.getData()).length) {
             this.logout();
         }
     },
 
     isAuthorized() {
-        if (Cookies.get('access_token')) {
-            return true;
-        } else {
-            return false;
-        }
+        return !!Cookies.get('access_token');
     },
 
-    getUserData() {
+    setData(value) {
+        Cookies.set(USER_DATA_KEY, btoa(JSON.stringify(value)));
+    },
+
+    getData() {
         const data = Cookies.get(USER_DATA_KEY);
 
-        return data ? JSON.parse(data) : {};
+        if (data) {
+            console.log(JSON.parse(atob(data)));
+            return JSON.parse(atob(data));
+        }
+
+        return {};
     },
 
     async authorize(login, password) {
@@ -35,11 +40,15 @@ export default  {
             }
         });
 
-        if (response.data.errors === true) {
+        const errors = response.data.errors;
+        const message = response.data.message;
+
+        if (errors) {
             return false;
         }
 
-        Cookies.set(ACCESS_TOKEN_KEY, response.data.message.access_token);
+        Cookies.set(ACCESS_TOKEN_KEY, message.access_token);
+        this.setData(message.data);
 
         return true;
     },
